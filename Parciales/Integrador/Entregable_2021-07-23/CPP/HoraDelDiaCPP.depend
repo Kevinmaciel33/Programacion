@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1627091713 source:c:\users\kevin\onedrive\escritorio\parcialrecu\entregable_2021-07-23\cpp\horadeldia.cpp
+	"HoraDelDia.h"
+
+1627091387 c:\users\kevin\onedrive\escritorio\parcialrecu\entregable_2021-07-23\cpp\horadeldia.h
+	<iostream>
+
+1627091465 source:c:\users\kevin\onedrive\escritorio\parcialrecu\entregable_2021-07-23\cpp\main.cpp
+	<iostream>
+	<windows.h>
+	"HoraDelDia.h"
+

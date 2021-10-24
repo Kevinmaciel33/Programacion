@@ -1,0 +1,16 @@
+memoria dinamica
+
+lista simplemente enlazada
+pila estatica
+pila dinamica -> pila implementada sobre una lista simplemente enlazada
+
+nodos -> tipo struct
+doble puntero -> typedef tNodo * tPila -> cada ves que encuentre tPila, lo reemplaza por tNodo*
+
+tNodo* -
+------------------------------
+hacer ver tope de pila
+hacer vaciar pila
+
+
+

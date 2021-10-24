@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1624760014 source:d:\facultad\programacion\teoria\listas\main.c
+	"Lista.h"
+
+1624757761 d:\facultad\programacion\teoria\listas\lista.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
+1624757863 source:d:\facultad\programacion\teoria\listas\lista.c
+	"Lista.h"
+

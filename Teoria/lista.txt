@@ -1,0 +1,13 @@
+listas
+1-desarrollar primitiva
+
+eliminar duplicados(primitiva muy comun)
+
+lista que te hace un ranking de los mejores elementos
+
+si hay duplicados, actualizarlos(juntarlos)
+
+2-usar primitiva
+
+programa que cargue una lista y despues las descargo, las muestro, las ordeno
+

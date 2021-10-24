@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1627001690 source:d:\facultad\programacion\teoria\arbol\main.c
+	"Main.h"
+
+1626817324 d:\facultad\programacion\teoria\arbol\main.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Arbol.h"
+
+1626817598 d:\facultad\programacion\teoria\arbol\arbol.h
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+
+1627001690 source:d:\facultad\programacion\teoria\arbol\arbol.c
+	"Arbol.h"
+
+1627001692 source:d:\programacion\teoria\arbol\arbol.c
+	"Arbol.h"
+
+1626817600 d:\programacion\teoria\arbol\arbol.h
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+
+1627001692 source:d:\programacion\teoria\arbol\main.c
+	"Main.h"
+
+1626817326 d:\programacion\teoria\arbol\main.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Arbol.h"
+

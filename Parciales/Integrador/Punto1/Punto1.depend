@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1626999612 source:c:\users\kevin\onedrive\escritorio\parcialrecu\punto1\lista.c
+	"Lista.h"
+
+1627049504 c:\users\kevin\onedrive\escritorio\parcialrecu\punto1\lista.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
