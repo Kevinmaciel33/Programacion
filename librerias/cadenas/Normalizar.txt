@@ -1,0 +1,310 @@
+#include "Cadenas.h"
+
+char * normaGral (char *cadOriginal)
+{
+    char *cadInicio, *posSiguiente, *antEspacio;
+
+    cadInicio = cadOriginal;
+    posSiguiente = cadOriginal + 1;
+
+    while (*cadOriginal)
+    {
+        // Sin blancos finales
+        if (*cadOriginal == 32 && *posSiguiente == '\0')
+            *cadOriginal = *posSiguiente;
+
+        // Un blanco entre palabras
+        if (*cadOriginal == 32 && *posSiguiente == 32)
+        {
+            antEspacio = cadOriginal;
+            while (*cadOriginal)
+            {
+                cadOriginal ++;
+                posSiguiente ++;
+                *cadOriginal = *posSiguiente;
+            }
+            cadOriginal = antEspacio;
+            posSiguiente = cadOriginal + 1;
+        }
+
+        else
+        {
+            cadOriginal ++;
+            posSiguiente ++;
+        }
+    }
+    cadOriginal = cadInicio;
+    posSiguiente = cadOriginal + 1;
+
+    // Sin blancos iniciales
+    if (*cadOriginal == 32)
+        while (*cadOriginal)
+        {
+            *cadOriginal = *posSiguiente;
+            cadOriginal ++;
+            posSiguiente ++;
+        }
+    return cadInicio;
+}
+
+char * tipoTitulo (char *cadOriginal)
+{
+    char *cadInicio, *posSiguiente;
+
+    normaGral (cadOriginal);
+
+    cadInicio = cadOriginal;
+    posSiguiente = cadOriginal + 1;
+
+    while (*cadOriginal)
+    {
+        if (*cadInicio >= 'a' || *cadInicio <= 'z')
+            *cadInicio = charupper (*cadInicio);
+        if (*cadOriginal == 32 && (*posSiguiente >= 'a' || *posSiguiente <= 'z'))
+            *posSiguiente = charupper (*posSiguiente);
+        cadOriginal ++;
+        posSiguiente ++;
+    }
+    return cadInicio;
+}
+
+char * tipoOracion (char *cadOriginal)
+{
+    char *cadInicio = cadOriginal;
+
+    normaGral (cadOriginal);
+
+    ESMINUS(*cadOriginal) ? AMAYUS(*cadOriginal) : *cadOriginal;
+    cadOriginal ++;
+    while (*cadOriginal)
+    {
+        ESMAYUS(*cadOriginal) ? AMINUS(*cadOriginal) : *cadOriginal;
+        cadOriginal ++;
+    }
+    return cadInicio;
+}
+
+char * priPalMayus (char *cadOriginal)
+{
+    char *inicioCadena = cadOriginal;
+
+    normaGral (cadOriginal);
+
+    // Primer palabra en mayúscula y el resto igual
+//    while (*cadOriginal != 32 && *cadOriginal)
+//    {
+//        if (*cadOriginal >= 'a' && *cadOriginal <= 'z')
+//            *cadOriginal -= numCambio;
+//        cadOriginal ++;
+//    }
+//    return inicioCadena;
+
+    // Primer palabra en mayúscula y el resto en minúscula
+    while (*cadOriginal != 32 && *cadOriginal)
+    {
+        ESMINUS(*cadOriginal) ? AMAYUS(*cadOriginal) : *cadOriginal;
+        cadOriginal ++;
+    }
+    while (*cadOriginal)
+    {
+        ESMAYUS(*cadOriginal) ? AMINUS(*cadOriginal) : *cadOriginal;
+        cadOriginal ++;
+    }
+
+    return inicioCadena;
+}
+
+char * nombre1 (char *cadOriginal)
+{
+    char *inicioCadena = cadOriginal;
+    char *posSiguiente, *aux;
+
+    // Normaliza la cadena
+    normaGral (cadOriginal);
+
+    // Apellido en Mayus
+    while (*cadOriginal != 32)
+    {
+        AMAYUS (*cadOriginal);
+        cadOriginal ++;
+    }
+
+    posSiguiente = cadOriginal + 1;
+
+    // Nombres acotados
+    while (*cadOriginal)
+    {
+        if (*cadOriginal == 32)
+        {
+            cadOriginal ++;
+            posSiguiente ++;
+            AMAYUS (*cadOriginal);
+            *posSiguiente = 46;
+
+            // Reposicionar los punteros
+            cadOriginal += 2;
+            while (*posSiguiente != 32 && *posSiguiente)
+            {
+                posSiguiente ++;
+                if (*posSiguiente)
+                    *cadOriginal = *posSiguiente;
+            }
+
+            // Copiar la cadena
+            aux = cadOriginal;
+            while (*cadOriginal)
+            {
+                *cadOriginal = *posSiguiente;
+                if (*cadOriginal)
+                {
+                    cadOriginal ++;
+                    posSiguiente ++;
+                }
+            }
+
+            cadOriginal = aux;
+            posSiguiente = cadOriginal + 1;
+        }
+    }
+
+    return inicioCadena;
+}
+
+char * nombre2 (char *cadOriginal)
+{
+    char *inicioCadena = cadOriginal;
+
+    normaGral (cadOriginal);
+
+    while (*cadOriginal != ',')
+    {
+        AMAYUS (*cadOriginal);
+        cadOriginal ++;
+    }
+
+    while (*cadOriginal)
+    {
+        if (*(cadOriginal - 1) == 32)
+            AMAYUS (*cadOriginal);
+        else
+            AMINUS (*cadOriginal);
+        cadOriginal ++;
+    }
+
+    return inicioCadena;
+}
+
+int ocurrenciasNoSolapadas (char *cad, char *ocurrencia)
+{
+    int cant = 0;
+    char *inicioOcurrencia = ocurrencia;
+
+    while (*cad)
+    {
+        while (*cad == *ocurrencia && *cad)
+        {
+            cad ++;
+            ocurrencia ++;
+        }
+        if (!*ocurrencia)
+        {
+            cant ++;
+        }
+        if (ocurrencia == inicioOcurrencia)
+            cad ++;
+
+        ocurrencia = inicioOcurrencia;
+    }
+
+    return cant;
+}
+
+int ocurrenciasSolapadas (char *cad, char *ocurrencia)
+{
+    int cant = 0;
+    char *inicioOcurrencia = ocurrencia;
+
+    while (*cad)
+    {
+        while (*cad == *ocurrencia && *cad)
+        {
+            cad ++;
+            ocurrencia ++;
+        }
+        if (!*ocurrencia)
+            cant ++;
+        if (ocurrencia == inicioOcurrencia)
+            cad ++;
+        if (*cad && ocurrencia != inicioOcurrencia)
+            cad --;
+        ocurrencia = inicioOcurrencia;
+    }
+
+    return cant;
+}
+
+int esPalabraPalindromo (char *cad)
+{
+    int tam = cadlen (cad), cont = 0;
+    char *finalCadena = cad + tam - 1;
+
+    while (*cad && cont < tam/2 && *cad == *finalCadena)
+    {
+        cont ++;
+        cad ++;
+        finalCadena --;
+    }
+
+    if (cont == tam/2)
+        return 1;
+
+    return 0;
+}
+
+int esFrasePalindromo (char *cad)
+{
+    int tam = cadlen (cad);
+    char *finalCadena = cad + tam - 1;
+
+    while (cad != finalCadena)
+    {
+        if (*cad == *finalCadena)
+        {
+            cad ++;
+            finalCadena --;
+        }
+        else
+        {
+            if (*cad == 32)
+                cad ++;
+            else
+                if (*finalCadena == 32)
+                    finalCadena --;
+                else
+                    break;
+        }
+    }
+    if (cad == finalCadena)
+        return 1;
+
+    return 0;
+}
+
+int esAnagrama (char *cad, char *cad2)
+{
+    int cont1, cont2;
+
+    while (*cad)
+    {
+        cont1 += *cad;
+        cont2 += *cad2;
+        cad ++;
+        cad2 ++;
+    }
+
+    if (cont1 == cont2)
+        return 1;
+
+    return 0;
+}
+

@@ -1,0 +1,47 @@
+#ifndef PILA_H_INCLUDED
+#define PILA_H_INCLUDED
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define TAMNUM 30
+#define TAMPILA 200
+#define MINIMOBYTES(x,y) (((x) < (y)) ? (x) : (y))
+#define ICARLY(x) ( ( (x)>9 ) )
+
+typedef struct
+{
+    char pila[TAMPILA];
+    unsigned int tope;
+} t_pila;
+
+void crearPila (t_pila *p);
+int pilaVacia (const t_pila *p);
+int pilaLlena (const t_pila *p, unsigned cantBytes);
+void vaciarPila (t_pila *p);
+int ponerEnPila (t_pila *p, const void *dato, unsigned cantBytes);
+int sacarDePila (t_pila *p, void *dato, unsigned cantBytes);
+int verTope (const t_pila *p, void *dato, unsigned cantBytes);
+
+
+int sumaNumPilas(const t_pila *p1, const t_pila *p2, t_pila *pr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif // PILA_H_INCLUDED

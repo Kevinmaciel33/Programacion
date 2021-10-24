@@ -1,0 +1,16 @@
+void *memmovePropio(void *s1, const void *s2, unsigned n)
+{
+    int i = 0;
+    char temp = (char)malloc(sizeof(temp));
+
+    if(!temp)
+        return;
+
+    for(i = 1;i <= n;i ++, (char)s1 ++, (char)s2 ++, (char*)temp++)
+    {
+        *temp = (char)s2;
+        (char)s1 = *temp;
+    }
+
+    free(temp);
+}

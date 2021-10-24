@@ -1,0 +1,209 @@
+#include "Cadenas.h"
+
+int postFuncion (int op)
+{
+    printf ("\n\n");
+    system ("pause");
+    system ("cls");
+    op = menu ();
+    return op;
+}
+
+int menu ()
+{
+    int op;
+
+    printf (" --------------\n\n");
+    printf (" MENU PRINCIPAL\n");
+    printf (" --------------\n\n");
+
+    printf (" Funciones\n");
+    printf (" 1) strupper\n");
+    printf (" 2) strlwr\n");
+    printf (" 3) strlen\n");
+    printf (" 4) strcpy\n");
+    printf (" 5) strcat\n");
+    printf (" 6) strchr\n");
+    printf (" 7) strrchr\n");
+    printf (" 8) strstr\n");
+    printf (" 9) toupper\n");
+    printf (" 10) tolwr\n");
+    printf (" 11) Normalizar cadena\n");
+    printf (" 12) Tipo Titulo\n");
+    printf (" 13) Tipo Oracion\n");
+    printf (" 14) Primer palabra mayuscula\n");
+    printf (" 15) Nombre (Formato EJEMPLO E. J.)\n");
+    printf (" 16) Nombre (Formato EJEMPLO, Ejem Plo)\n");
+    printf (" 17) Contar Ocurrencias sin Solapamiento\n");
+    printf (" 18) Contar Ocurrencias con Solapamiento\n");
+    printf (" 19) Palabra Palindromo\n");
+    printf (" 20) Frase Palindromo\n");
+    printf (" 21) Anagrama\n\n");
+
+    printf (" 0) Salir\n\n");
+
+    do
+    {
+        printf (" Elija una opcion: ");
+        scanf ("%d", &op);
+        printf ("\n\n");
+    }
+    while (op < 0 || op > 21);
+    getchar ();
+    return op;
+}
+
+char * cadupper(char *cadena)
+{
+    int numCambio = 'a' - 'A';
+    char *inicioCadena = cadena;
+
+    while (*cadena)//while (*cadena)
+    {
+        if (*cadena >= 'a' && *cadena <= 'z')
+            *cadena -= numCambio;
+        cadena ++;
+    }
+    return inicioCadena;
+}
+
+char * cadlwr(char *cadena)
+{
+    int numCambio = 'a' - 'A';
+    char *inicioCadena = cadena;
+
+    while (*cadena)//while (*cadena)
+    {
+        if (*cadena >= 'A' && *cadena <= 'Z')
+            *cadena += numCambio;
+        cadena ++;
+    }
+    return inicioCadena;
+}
+
+int cadlen (char *cad)
+{
+    int longitud = 0;
+
+    while (*cad)
+    {
+        longitud ++;
+        cad ++;
+    }
+    return longitud;
+}
+
+char * cadcpy (char *cadNueva, char *cadFuente)
+{
+    char *inicioCadenaNueva = cadNueva;
+
+    while (*cadFuente)
+    {
+        *cadNueva = *cadFuente;
+        cadFuente ++;
+        cadNueva ++;
+    }
+    *cadNueva = '\0';
+    return inicioCadenaNueva;
+}
+
+char * cadcat (char *cad1, char *cad2)
+{
+    char *inicioCadena1 = cad1;
+//
+//    while (*cad1)
+//    {
+//        cad1 ++;
+//    }
+//    while (*cad2)
+//    {
+//        *cad1 = *cad2;
+//        cad2 ++;
+//        cad1 ++;
+//    }
+//    *cad1 = '\0';
+    int tam = cadlen(cad1);
+    cad1 += tam;
+    cadcpy(cad1,cad2);
+    return inicioCadena1;
+}
+
+char * cadchr (char *cad, char caracter)
+{
+        while (*cad && *cad != caracter)
+        cad ++;
+        return (*cad == caracter) ? cad : NULL;
+//    while (*cad)
+//    {
+//        if (*cad == caracter)
+//            return cad;
+//        cad ++;
+//    }
+// 1) return cad;
+// 2) return (caracter == '\0') ? cad : NULL;
+// 3) if (*cad == caracter)
+//        return cad;
+//    else
+//        return NULL;
+}
+
+char * cadrchr (char *cad, char caracter)
+{
+    char *ptrCad = NULL;
+
+    while (*cad)
+    {
+        if (*cad == caracter)
+            ptrCad = cad;
+        cad ++;
+    }
+    return ptrCad;
+}
+
+char * cadcad (char *cadPajar, char *cadAguja)
+{
+    int movimientos = 0;
+    char *ptrCad;
+
+    while (*cadPajar)
+    {
+        if (*cadPajar == *cadAguja)
+        {
+            ptrCad = cadPajar;
+            while (*cadPajar && *cadAguja && *cadPajar == *cadAguja)
+            {
+                cadPajar ++;
+                cadAguja ++;
+                movimientos ++;
+            }
+            if (*cadAguja == '\0')
+                return ptrCad;
+            else
+            {
+                cadPajar -= movimientos;
+                cadAguja -= movimientos;
+            }
+        }
+        cadPajar ++;
+        movimientos = 0;
+    }
+    return NULL;
+}
+
+char charupper (char dato)
+{
+    int numCambio = 'a' - 'A';
+
+    if (dato >= 'a' && dato <= 'z')
+        dato -= numCambio;
+    return dato;
+}
+
+char charlower (char dato)
+{
+    int numCambio = 'a' - 'A';
+
+    if (dato >= 'A' && dato <= 'Z')
+    dato += numCambio;
+    return dato;
+}

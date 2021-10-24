@@ -1,0 +1,6 @@
+#ifndef LINEASTEXTO_H
+#define LINEASTEXTO_H
+
+
+
+#endif // LINEASTEXTO_H

@@ -1,0 +1,15 @@
+ int intercambiarGen(void * n1, void * n2, int tam)
+ {
+     void* aux;
+     int retorno;
+     if(!(aux=malloc(tam)))
+     retorno = 0;
+         memcpy(aux,n1,(size_t)tam);
+         memcpy(n1,n2,(size_t)tam);
+         memcpy(n2,aux,(size_t)tam);
+         retorno = 1;
+         free(aux);
+    return retorno;
+ }
+
+84.23

@@ -1,0 +1,10 @@
+void* ffMemcpy(void * dest, const void *orig, unsigned cantBy)
+{
+    void *aux= dest;
+
+    for(int i=0; i<cantBy; i++, (char*)orig++, (char*)dest++)
+        *(char*)dest= *(char*)orig;
+
+
+    return aux;
+}
